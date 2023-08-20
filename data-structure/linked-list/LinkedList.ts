@@ -10,11 +10,12 @@ interface ILinkedList<T> {
         value?: T,
         callback?: (...args: any) => any
     }): LinkedListNode<T> | null;
+    peek(): LinkedListNode<T> | null;
     deleteTail(): LinkedListNode<T> | null;
     deleteHead(): LinkedListNode<T> | null;
     fromArray(array: Array<T>): LinkedList<T>;
     toArray(): Array<T>;
-    reverse(): LinkedList<T>
+    reverse(): LinkedList<T>;
     get size(): number;
 }
 
@@ -136,6 +137,12 @@ export default class LinkedList<T> implements ILinkedList<T> {
         }
 
         return null;
+    }
+
+    peek(): LinkedListNode<T> | null {
+        if (!this._head) return null;
+
+        return this._tail;
     }
 
     deleteTail(): LinkedListNode<T> | null {
