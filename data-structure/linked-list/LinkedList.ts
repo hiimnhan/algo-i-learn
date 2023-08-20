@@ -10,13 +10,15 @@ interface ILinkedList<T> {
         value?: T,
         callback?: (...args: any) => any
     }): LinkedListNode<T> | null;
-    peek(): LinkedListNode<T> | null;
     deleteTail(): LinkedListNode<T> | null;
     deleteHead(): LinkedListNode<T> | null;
     fromArray(array: Array<T>): LinkedList<T>;
     toArray(): Array<T>;
     reverse(): LinkedList<T>;
+    isEmpty(): boolean;
     get size(): number;
+    get head(): LinkedListNode<T> | null;
+    get tail(): LinkedListNode<T> | null;
 }
 
 export default class LinkedList<T> implements ILinkedList<T> {
@@ -139,12 +141,6 @@ export default class LinkedList<T> implements ILinkedList<T> {
         return null;
     }
 
-    peek(): LinkedListNode<T> | null {
-        if (!this._head) return null;
-
-        return this._tail;
-    }
-
     deleteTail(): LinkedListNode<T> | null {
         if (!this._head) return null;
         const deletedTail = this._tail;
@@ -225,7 +221,19 @@ export default class LinkedList<T> implements ILinkedList<T> {
         return this;
     }
 
+    isEmpty(): boolean {
+        return !this._head;
+    }
+
     get size(): number {
         return this._size;
+    }
+
+    get head(): LinkedListNode<T> | null {
+        return this._head;
+    }
+
+    get tail(): LinkedListNode<T> | null {
+        return this._tail;
     }
 }
